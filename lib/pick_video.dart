@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class PickVideo extends StatefulWidget {
   PickVideo({Key key}) : super(key: key);
@@ -14,11 +15,17 @@ class _PickVideoState extends State<PickVideo> {
   TextEditingController _controller = TextEditingController();
 
   upload() async {
-    File file = await ImagePicker.pickVideo(
-        source: ImageSource.camera, maxDuration: const Duration(seconds: 10));
-    print(file);
     PickedFile pickedFile = await ImagePicker().getVideo(source: ImageSource.camera, maxDuration: const Duration(seconds: 10));
     print(pickedFile);
+
+    final uint8list = await VideoThumbnail.thumbnailData(
+      video: pickedFile.path,
+      imageFormat: ImageFormat.JPEG,
+      maxWidth: 128, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
+      quality: 25,
+    );
+
+    print(uint8list);
   }
 
   @override
