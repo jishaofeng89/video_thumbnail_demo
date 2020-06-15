@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:video_thumbnail_demo/thumbnail/thumbnail_request.dart';
+import 'package:video_thumbnail_demo/thumbnail/thumbnail_result.dart';
+import 'package:video_thumbnail_demo/thumbnail/thumbnail_util.dart';
 
 class PickVideo extends StatefulWidget {
   PickVideo({Key key}) : super(key: key);
@@ -18,14 +21,23 @@ class _PickVideoState extends State<PickVideo> {
     PickedFile pickedFile = await ImagePicker().getVideo(source: ImageSource.camera, maxDuration: const Duration(seconds: 10));
     print(pickedFile);
 
-    final uint8list = await VideoThumbnail.thumbnailData(
-      video: pickedFile.path,
-      imageFormat: ImageFormat.JPEG,
-      maxWidth: 128, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
-      quality: 25,
-    );
+    // final uint8list = await VideoThumbnail.thumbnailData(
+    //   video: pickedFile.path,
+    //   imageFormat: ImageFormat.JPEG,
+    //   maxWidth: 128, // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
+    //   quality: 25,
+    // );
 
-    print(uint8list);
+    // print(uint8list);
+
+    String thumbnailPath = await VideoThumbnail.thumbnailFile(
+      video: pickedFile.path,
+      imageFormat: ImageFormat.PNG,
+      maxWidth: 128,
+      quality: 25);
+
+    print(thumbnailPath);
+
   }
 
   @override
