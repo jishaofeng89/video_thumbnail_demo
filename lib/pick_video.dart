@@ -3,9 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
-import 'package:video_thumbnail_demo/thumbnail/thumbnail_request.dart';
-import 'package:video_thumbnail_demo/thumbnail/thumbnail_result.dart';
-import 'package:video_thumbnail_demo/thumbnail/thumbnail_util.dart';
 
 class PickVideo extends StatefulWidget {
   PickVideo({Key key}) : super(key: key);
